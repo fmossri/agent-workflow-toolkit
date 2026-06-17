@@ -1,0 +1,26 @@
+---
+description: One-agent-per-feature workflow when scoping or implementing a backlog item
+globs: docs/specs/features/**
+alwaysApply: false
+---
+
+# One-agent-per-feature workflow
+
+Each session implements **one** backlog feature, scoped by a feature spec. Full
+process, acceptance-criteria patterns, and branch naming:
+`docs/specs/features/README.md` (AF-8). Git/PR policy: ADR-0005.
+
+- **One feature, one branch, one PR.** Branch `feat/<backlog-id>-<slug>`; never push
+  to `main`. Reference the backlog ID in commits and the PR.
+- **Scaffold the scope doc first.** Run `pnpm gen:create-feature-spec` (skill:
+  `create-feature-spec`) — writes `docs/specs/features/<slug>.md` only. The agent
+  framework does **not** prescribe project code layout (ADR-0006).
+- **The feature spec is the contract.** Fill goal, acceptance criteria (gate /
+  structural / behavioral prefixes), touched modules, out of scope. Check boxes
+  (`- [x]`) as you complete them; all must pass before opening the PR.
+- **Gates are non-negotiable.** `pnpm lint`, `typecheck`, `test`, and `doc-lint`
+  (when docs changed) must pass — see the **gate:** criteria in the spec template.
+- **Status lifecycle:** `Draft` → `Active` (implementation started) → `Completed`
+  (merged). Set `Completed` when the owner merges; mark the backlog item done.
+
+Structural criteria reference **this project's** architecture, not a framework default.

@@ -1,0 +1,16 @@
+{
+  "name": "@agent-workflow/generators",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic scaffolders for docs, ADRs, diaries, and feature specs. Templates ship inside this package.",
+  "exports": {
+    "./lib/args": "./src/lib/args.ts",
+    "./lib/template": "./src/lib/template.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  }
+}

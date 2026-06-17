@@ -1,0 +1,13 @@
+# Block direct pushes to main. main is owner-merged via PR (ADR-0005, policy C).
+# This is a client-side guard (bypassable with --no-verify) that backstops the
+# absence of server-side branch protection on the free-private GitHub plan.
+protected_ref="refs/heads/main"
+while read -r _local_ref _local_oid remote_ref _remote_oid; do
+  if [ "$remote_ref" = "$protected_ref" ]; then
+    echo "" >&2
+    echo "✖ Direct push to main is blocked (ADR-0005)." >&2
+    echo "  Push a feat/<backlog-id>-slug branch and open a PR; the owner merges." >&2
+    echo "" >&2
+    exit 1
+  fi
+done

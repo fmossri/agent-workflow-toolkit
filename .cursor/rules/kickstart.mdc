@@ -1,0 +1,45 @@
+---
+description: Framework adoption and content bootstrap when joining a new or in-progress project
+globs: AGENTS.md,docs/requirements.md,docs/backlog.md,docs/architecture.md,docs/kickstart.md
+alwaysApply: false
+---
+
+# Framework adoption & kickstart
+
+Portable process (ADR-0006, AF-9). Full protocol: `docs/kickstart.md`. Do **not** run
+feature work until the user has opted into the phases they need.
+
+## Before anything else
+
+1. **Confirm project root** — cwd is where the user intends the framework (code,
+   `package.json`, or explicit user path).
+2. **Inspect** which framework paths exist vs are missing (`AGENTS.md`, `docs/requirements.md`,
+   `docs/backlog.md`, `docs/architecture.md`, `docs/kickstart.md`, …).
+3. **Ask the user** (never assume):
+   - **Phase A — Structure adoption?** Run `pnpm gen:scaffold-docs` (adds **missing**
+     files only; idempotent — skips existing paths; `--force` only if user explicitly
+     wants overwrite).
+   - **Phase B — Content bootstrap?** Offer if placeholders remain (see below) or user
+     wants help aligning existing docs into the framework shape.
+
+Either phase can be declined. Proceed with the user's stated task if they skip both.
+
+## Placeholder detection (phase B offer)
+
+Offer content bootstrap when **both** are true:
+
+- `docs/requirements.md` still contains `_Define MVP scope here._` and/or empty FR/NFR tables.
+- `docs/backlog.md` still matches the scaffold template (empty milestone table, no real items).
+
+If real content already exists, bootstrap means **merge/draft** — never wholesale replace
+an existing `architecture.md`, `requirements.md`, or similar.
+
+## Phase B sequence (user opt-in)
+
+Requirements elicitation → specification → architecture → ADRs → backlog → TODO → diary
+` — HANDOFF`. See `docs/kickstart.md` for the step table.
+
+## After kickstart
+
+Normal workflow: `pnpm gen:create-feature-spec`, one backlog item per session — see
+`.cursor/rules/feature-workflow.mdc`.

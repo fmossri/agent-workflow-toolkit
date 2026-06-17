@@ -1,0 +1,3 @@
+## {{ENTRY_STAMP}} — {{SUBJECT}}{{HANDOFF_SUFFIX}}
+
+{{BODY}}

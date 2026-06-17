@@ -1,0 +1,27 @@
+---
+description: TypeScript conventions — strict types, no escape hatches, validate at boundaries
+globs: **/*.ts
+alwaysApply: false
+---
+
+# TypeScript conventions
+
+The stack is Node.js + TypeScript, `strict` everywhere. ESLint runs **type-aware**
+`typescript-eslint` (`strictTypeChecked` + `stylisticTypeChecked`). Sources of
+truth: `eslint.config.mjs`, `tsconfig.base.json`, and
+`docs/specs/agent-workflow.md` §3–§4. Run `pnpm lint` and `pnpm typecheck`.
+
+- **No escape hatches.** No `any`, no `as` casts to dodge a type error, no
+  `// eslint-disable` / `@ts-ignore` to silence a real problem. If the types fight
+  you, fix the type, narrow, or model the data correctly. `noUncheckedIndexedAccess`
+  is on — handle the `undefined` from index access.
+- **Handle promises.** `no-floating-promises` / `no-misused-promises` are errors:
+  `await` or explicitly `void` every promise.
+- **Validate at boundaries.** External/untyped data (third-party API responses,
+  HTTP request bodies, parsed files) is validated with **Zod** at the edge before
+  it flows inward; shared schemas live in `packages/shared` (AF-7, lands with
+  M0-3+). Don't trust a hand-written `interface` for data that crossed a boundary.
+- **Module specifiers.** The repo is NodeNext + `verbatimModuleSyntax`: use
+  explicit `.js` extensions on relative imports and `import type` for type-only
+  (`node_modules/@agent-workflow/doc-linter` is the one exception — it runs via `node`
+  type-stripping with `.ts` specifiers; see its diary if you touch it.)

@@ -1,0 +1,21 @@
+---
+description: Git workflow — feature branches, Conventional Commits, PRs, never push to main
+alwaysApply: true
+---
+
+# Git workflow (agents propose, owner disposes)
+
+Policy C: agents do real git work but the owner is the sole merge gatekeeper.
+Sources of truth: `docs/adr/0005-agent-git-governance-and-workflow.md` and
+`docs/adr/0010-procedural-enforcement-on-free-private-plan.md`.
+
+- **Branch per feature:** `feat/<backlog-id>-<slug>` (e.g. `feat/AF-3-cursor-rules`).
+  One feature per branch/session.
+- **Conventional Commits** (`feat:`, `fix:`, `docs:`, `chore:`, `ci:`, …);
+  commitlint enforces this on commit. Reference the backlog ID in the commit/PR.
+- **Never push to or merge into `main`.** Push your feature branch and open a PR;
+  the owner reviews and merges. A `pre-push` hook blocks direct pushes to `main`
+  (client-side, so don't `--no-verify` it); CI is advisory until the repo can be
+  server-side protected.
+- **Don't try to enable GitHub branch protection** — the repo is Free + private,
+  where it won't enforce (ADR-0010). The hook + discipline are the substitute.

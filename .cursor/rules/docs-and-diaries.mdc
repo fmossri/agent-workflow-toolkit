@@ -1,0 +1,33 @@
+---
+description: Docs, diary, and ADR/spec discipline when editing documentation
+globs: docs/**,AGENTS.md
+alwaysApply: false
+---
+
+# Docs, diaries & decisions
+
+The `docs/` tree is the project's memory. Read order and rules live in
+`AGENTS.md` and the per-directory READMEs — follow them, don't restate them here.
+
+- **Every doc has YAML front-matter.** `title`, `type`, `updated` plus
+  type-specific fields; the `type` discriminator selects the schema. This is
+  machine-checked by the AF-6 doc linter (`pnpm doc-lint`) against
+  `node_modules/@agent-workflow/doc-linter/front-matter.schema.json` (field rules in
+  `docs/specs/agent-workflow.md` §4). Dates are ISO (`YYYY-MM-DD`).
+- **Diaries: knowledge, not a journal.** Record what a future agent would pay to
+  rediscover (quirks, dead ends, non-obvious trade-offs) — not a play-by-play of
+  edits. One diary per session under `docs/agent-diaries/`; never edit another
+  agent's diary. End a session with a ` — HANDOFF` entry if work continues. There
+  is **no diary index** — prior context is found by search. Rules:
+  `docs/agent-diaries/README.md` (ADR-0008).
+- **Decisions are ADRs.** Architectural/cross-cutting decisions become ADRs (don't
+  reverse an `Accepted` one — supersede it). Process + template + index:
+  `docs/adr/README.md`. When you add/supersede an ADR, update the index table
+  (the linter checks index↔file sync).
+- **Link, don't duplicate** — one source of truth per fact, and relative links
+  must resolve (the linter checks this).
+- **Feature specs** scope one backlog item per session (`docs/specs/features/`).
+  Workflow and acceptance-criteria patterns: `docs/specs/features/README.md` (AF-8).
+- **Keep TODO and backlog in sync.** Copy/break down backlog items into
+  `docs/TODO.md`; mark a backlog item `completed` only when its TODO work closes
+  it. The backlog is durable — never delete from it.
