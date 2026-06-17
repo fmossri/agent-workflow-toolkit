@@ -34,7 +34,9 @@ docs/
 - Prefer linking over duplicating. One source of truth per fact.
 - Dates use ISO format (`YYYY-MM-DD`).
 
-## Cursor rules (optional)
+## Cursor integration
 
-When using Cursor, file-scoped guardrails may live under `.cursor/rules/*.mdc`.
-They point to ADR/spec sources of truth — they do not replace this documentation.
+When using Cursor, `.cursor/rules/*.mdc` and `.cursor/skills/*/SKILL.md` are scaffolded
+by **`gen:scaffold-docs`** (automatic inside Cursor; `--with-cursor` otherwise). They
+point to ADR/spec sources of truth — they do not replace this documentation. Projects
+may add optional local rules (e.g. code-layout conventions) after architecture is decided.

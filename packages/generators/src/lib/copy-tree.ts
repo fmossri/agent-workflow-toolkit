@@ -11,7 +11,7 @@ import { dirname, join, relative } from "node:path";
 
 import { fillTemplate, type TemplateVars } from "./template.ts";
 
-const TEXT_EXTENSIONS = new Set([".md", ".txt", ".json", ".yaml", ".yml"]);
+const TEXT_EXTENSIONS = new Set([".md", ".mdc", ".txt", ".json", ".yaml", ".yml"]);
 
 export interface CopyTreeResult {
   readonly created: readonly string[];

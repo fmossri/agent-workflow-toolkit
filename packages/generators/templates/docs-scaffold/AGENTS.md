@@ -26,14 +26,15 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
    final entry, if suffixed ` — HANDOFF`, is your starting brief. Then use
    grep/semantic search over the older `docs/agent-diaries/**` for any specific
    prior context you need (ADR-0008).
-3. **Adopting the framework (new or in-progress repo).** Confirm you are in the
+3. **Adopting the toolkit (new or in-progress repo).** Confirm you are in the
    **project root**. Inspect which framework files exist. **Ask the user:**
-   - **Structure adoption?** — run `scaffold-docs-structure` (adds missing `AGENTS.md` /
-     `docs/*` only; never overwrites existing files unless `--force`).
+   - **Structure adoption?** — run `pnpm gen:scaffold-docs` (or the bootstrap
+     command in `docs/kickstart.md` before scripts are wired). Adds missing
+     `AGENTS.md`, `docs/*`, and `gen:*` scripts; **in Cursor**, also `.cursor/`
+     (automatic — use `--no-cursor` only if the user declines).
    - **Content bootstrap?** — if placeholders remain, offer kickstart per
      [`docs/kickstart.md`](docs/kickstart.md) (phase B; user opt-in; merge — do not
-     replace existing real docs). **Non-Cursor agents:** this step and kickstart.md are
-     the authority — `.cursor/*` is optional.
+     replace existing real docs).
 4. Check the current work: [`docs/TODO.md`](docs/TODO.md) (today's working set)
    and [`docs/backlog.md`](docs/backlog.md) (the full backlog).
 5. **One feature per session** (after kickstart). Scope work with
@@ -50,6 +51,12 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
   [`docs/adr/README.md`](docs/adr/README.md).
 - **Propose new specs proactively.** When a subject becomes concrete enough to
   deserve its own document, create it under [`docs/specs/`](docs/specs/README.md).
+- **Propose pattern promotion (owner gate).** When the same **code shape** repeats
+  (~3× or clearly stabilizing), **tell the user once** and ask whether to promote it
+  to a project pattern (generator under `tools/<project>/` + lint/boundaries/tests +
+  optional `.cursor/rules/*`). Do **not** record, scaffold, or add enforcement without
+  approval. Process: [`docs/specs/agent-workflow.md`](docs/specs/agent-workflow.md) §8
+  when present; `.cursor/rules/pattern-promotion.mdc` when scaffolded.
 - **Keep TODO and backlog in sync.** Copy backlog items into `docs/TODO.md`; mark
   a backlog item `completed` only when its TODO work closes it.
 

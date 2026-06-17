@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Deterministic scaffolders for docs, ADRs, diaries, and feature specs. Templates ship inside this package.",
+  "description": "Deterministic scaffolders for docs, ADRs, diaries, feature specs, and Cursor integration. Templates ship inside this package (docs-scaffold + cursor).",
   "exports": {
     "./lib/args": "./src/lib/args.ts",
     "./lib/template": "./src/lib/template.ts"

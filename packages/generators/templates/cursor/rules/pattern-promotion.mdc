@@ -1,0 +1,38 @@
+---
+description: Propose promoting recurring code shapes to generators + enforcement (owner gate)
+globs: apps/**,packages/**,tools/**
+alwaysApply: false
+---
+
+# Pattern promotion
+
+When the same **code shape** keeps appearing (e.g. controller/handler style, service
+module, test layout), prefer **promoting it to a project pattern** instead of endless
+copy-paste — but **only with owner approval**. Full process:
+`docs/specs/agent-workflow.md` §8.
+
+## Observe → propose (do not act unilaterally)
+
+- **Signal, not trigger:** ~3 similar implementations (or one clearly stabilizing shape)
+  means **mention it once** to the user — not auto-scaffold, not auto-lint.
+- **Ask first:** "This shape is repeating — promote it to a pattern (generator + enforcement)?"
+  Do **not** record, scaffold, or add rules without explicit yes.
+- **Default: follow-up work.** Unless the user wants promotion **now**, propose a backlog
+  item or separate PR — do not derail the current feature session.
+- **Propose once per pattern** per session; do not nag on every similar file.
+
+## After owner approval
+
+1. **Record** — section in `docs/architecture.md` for incremental conventions; tiny ADR
+   if cross-cutting or hard to reverse (`docs/adr/README.md`).
+2. **Extract template** — best example → `tools/<project>/scaffold-<artifact>/templates/`
+   with placeholders; reuse `@agent-workflow/generators/lib/*`.
+3. **Wire generator** — `pnpm <project>:scaffold-<artifact> --name …` in root `package.json`.
+4. **Add enforcement** — ESLint boundaries / import rules and architectural tests first;
+   custom ESLint rules only if boundaries are not enough. **Prettier is formatting only**
+   — it does not encode architecture.
+5. **Point agents at it** — add or extend a `.cursor/rules/*` entry so new artifacts use
+   the generator; do not hand-roll.
+
+Portable `@agent-workflow/*` generators stay **doc-only** (ADR-0006). Code scaffolders
+live under `tools/<project>/`, not in the toolkit package.

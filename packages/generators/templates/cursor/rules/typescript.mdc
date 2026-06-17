@@ -1,0 +1,21 @@
+---
+description: TypeScript conventions — strict types, no escape hatches, validate at boundaries
+globs: **/*.ts
+alwaysApply: false
+---
+
+# TypeScript conventions
+
+When TypeScript is wired in this repo: `strict` everywhere; ESLint type-aware
+rules when configured. Sources of truth: `eslint.config.mjs`, `tsconfig*.json`, and
+`docs/specs/agent-workflow.md` §3–§4. Run `pnpm lint` and `pnpm typecheck` when present.
+
+- **No escape hatches.** No `any`, no `as` casts to dodge a type error, no
+  `// eslint-disable` / `@ts-ignore` to silence a real problem. If the types fight
+  you, fix the type, narrow, or model the data correctly.
+- **Handle promises.** `await` or explicitly `void` every promise when
+  `no-floating-promises` / `no-misused-promises` are enabled.
+- **Validate at boundaries.** External/untyped data is validated with **Zod** (or
+  equivalent) at the edge before it flows inward.
+- **Module specifiers.** When using NodeNext + `verbatimModuleSyntax`: use explicit
+  `.js` extensions on relative imports and `import type` for type-only imports.

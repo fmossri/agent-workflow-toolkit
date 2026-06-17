@@ -1,0 +1,23 @@
+---
+description: Prettier owns all formatting; never hand-format code or docs
+globs: **/*.ts,docs/**,AGENTS.md
+alwaysApply: false
+---
+
+# Formatting is Prettier's job, not yours
+
+Prettier is the repo-wide formatting authority for **all** code, config, and
+Markdown (`docs/**` + `AGENTS.md` included). Source conforms to Prettier, never
+the reverse. When present, see `docs/adr/0009-prettier-formatting-authority.md`.
+
+So, before you write:
+
+- **Don't hand-format.** Don't manually pad Markdown tables, align columns, pick
+  emphasis markers (`*x*` vs `_x_`), or hand-wrap lines to a column. Prettier
+  decides all of it — config is in `.prettierrc.json` when wired.
+- **Run `pnpm format` after edits** (or `pnpm format:check` to verify) when those
+  scripts exist.
+- **Style vs structure.** Prettier owns Markdown _style_; the doc linter owns
+  Markdown _structure/metadata_ (front-matter, ISO dates, single-H1, link
+  existence, ADR-index). They don't overlap — don't try to satisfy one by fighting
+  the other.
