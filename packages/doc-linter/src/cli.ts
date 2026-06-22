@@ -18,7 +18,7 @@ function main(): void {
 
   if (problems.length === 0) {
     console.log(
-      "doc-lint: all docs conform (front-matter schema, headings, relative links, ADR-index sync)",
+      "doc-lint: all docs conform (front-matter schema, headings, relative links, ADR- and incident-doc sync)",
     );
     return;
   }

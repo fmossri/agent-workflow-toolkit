@@ -38,10 +38,10 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
 4. Check the current work: [`docs/TODO.md`](docs/TODO.md) (today's working set)
    and [`docs/backlog.md`](docs/backlog.md) (the full backlog).
 5. **Incident reported?** If the user reports a bug or bad data, **create an incident
-   report first** ([`docs/incident-reports/`](docs/incident-reports/README.md),
+   report first** — run `pnpm gen:create-incident-report` ([`docs/incident-reports/`](docs/incident-reports/README.md),
    skill: `create-incident-report`) — before fixing. After the fix is verified,
-   **ask the user for permission**, then write a postmortem ([`docs/postmortems/`](docs/postmortems/README.md),
-   skill: `create-postmortem`).
+   **ask the user for permission**, then run `pnpm gen:create-postmortem`
+   ([`docs/postmortems/`](docs/postmortems/README.md), skill: `create-postmortem`).
 6. **One feature per session** (after kickstart). Scope work with
    `pnpm gen:create-feature-spec`; see [`docs/specs/features/README.md`](docs/specs/features/README.md).
 

@@ -49,6 +49,12 @@ describe("scaffold-docs-structure (consumer smoke)", () => {
 
     expect(existsSync(join(target, ".cursor/rules/git-workflow.mdc"))).toBe(true);
     expect(existsSync(join(target, ".cursor/skills/create-adr/SKILL.md"))).toBe(true);
+    expect(existsSync(join(target, ".cursor/skills/create-incident-report/SKILL.md"))).toBe(
+      true,
+    );
+    expect(existsSync(join(target, ".cursor/skills/create-postmortem/SKILL.md"))).toBe(true);
+    expect(existsSync(join(target, "docs/incident-reports/README.md"))).toBe(true);
+    expect(existsSync(join(target, "docs/postmortems/README.md"))).toBe(true);
     expect(existsSync(join(target, ".cursor/rules/pattern-promotion.mdc"))).toBe(true);
 
     const pkg = JSON.parse(readFileSync(join(target, "package.json"), "utf8")) as {

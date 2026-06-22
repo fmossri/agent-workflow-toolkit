@@ -54,7 +54,20 @@ Non-Cursor agents follow `AGENTS.md` + `docs/kickstart.md` after scaffold.
 | Package | Role |
 | ------- | ---- |
 | `@agent-workflow/generators` | Scaffolders + canonical `templates/` (docs-scaffold + cursor) |
-| `@agent-workflow/doc-linter` | Front-matter schema, ADR index, link checks |
+| `@agent-workflow/doc-linter` | Front-matter schema, ADR/incident sync, link checks |
+
+## Generators (`gen:*`)
+
+After phase A wires scripts into `package.json`:
+
+| Script | Purpose |
+| ------ | ------- |
+| `gen:scaffold-docs` | Idempotent docs + Cursor scaffold |
+| `gen:create-adr` | Next-numbered ADR (+ index row) |
+| `gen:diary-entry` | New diary or append entry |
+| `gen:create-feature-spec` | Feature scope doc under `docs/specs/features/` |
+| `gen:create-incident-report` | Next `INC-YYYY-NNN` incident report (**before** fixing) |
+| `gen:create-postmortem` | Postmortem linked to an incident (**after** fix) |
 
 ## Development (this repo)
 

@@ -16,6 +16,9 @@ permission**, then write a postmortem if approved.
 
 Use the **`create-postmortem`** skill (`.cursor/skills/create-postmortem/`).
 
+Run `pnpm gen:create-postmortem --incident-id INC-YYYY-NNN --title "…" --summary "…"` —
+do not hand-number `PM-YYYY-NNN` ids.
+
 ## File naming
 
 `PM-YYYY-NNN-short-slug.md` — matches the incident sequence where possible (e.g.

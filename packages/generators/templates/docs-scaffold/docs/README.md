@@ -41,6 +41,8 @@ docs/
 ## Cursor integration
 
 When using Cursor, `.cursor/rules/*.mdc` and `.cursor/skills/*/SKILL.md` are scaffolded
-by **`gen:scaffold-docs`** (automatic inside Cursor; `--with-cursor` otherwise). They
-point to ADR/spec sources of truth — they do not replace this documentation. Projects
-may add optional local rules (e.g. code-layout conventions) after architecture is decided.
+by **`gen:scaffold-docs`** (automatic inside Cursor; `--with-cursor` otherwise). Skills
+include `create-adr`, `add-diary-entry`, `create-feature-spec`, `create-incident-report`,
+and `create-postmortem` — each wraps a matching **`gen:*`** script. They point to
+sources of truth under `docs/`; they do not replace this documentation. Projects may
+add optional local rules (e.g. code-layout conventions) after architecture is decided.

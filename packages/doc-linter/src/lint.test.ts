@@ -156,6 +156,96 @@ updated: 2026-06-17
     );
     expect(messages()).toContain('missing required field "backlog_ids"');
   });
+
+  it("passes a conformant incident-report", () => {
+    write(
+      "docs/incident-reports/INC-2026-001-stale-panel.md",
+      `---
+title: "INC-2026-001: Stale panel"
+type: incident-report
+id: INC-2026-001
+status: open
+severity: medium
+summary: "Users see old data"
+updated: 2026-06-22
+---
+
+# INC-2026-001: Stale panel
+`,
+    );
+    expect(run()).toEqual([]);
+  });
+
+  it("flags an incident-report with invalid severity", () => {
+    write(
+      "docs/incident-reports/INC-2026-001-stale-panel.md",
+      `---
+title: "INC-2026-001: Stale panel"
+type: incident-report
+id: INC-2026-001
+status: open
+severity: urgent
+summary: "Users see old data"
+updated: 2026-06-22
+---
+
+# INC-2026-001: Stale panel
+`,
+    );
+    expect(messages().some((m) => m.includes("low, medium, high, critical"))).toBe(true);
+  });
+
+  it("passes a conformant postmortem linked to an incident", () => {
+    write(
+      "docs/incident-reports/INC-2026-001-stale-panel.md",
+      `---
+title: "INC-2026-001: Stale panel"
+type: incident-report
+id: INC-2026-001
+status: resolved
+severity: medium
+summary: "Users see old data"
+updated: 2026-06-22
+---
+
+# INC-2026-001: Stale panel
+`,
+    );
+    write(
+      "docs/postmortems/PM-2026-001-stale-panel-rca.md",
+      `---
+title: "PM-2026-001: Stale panel RCA"
+type: postmortem
+id: PM-2026-001
+incident_id: INC-2026-001
+status: draft
+summary: "Cache TTL too long"
+updated: 2026-06-22
+---
+
+# PM-2026-001: Stale panel RCA
+`,
+    );
+    expect(run()).toEqual([]);
+  });
+
+  it("flags a postmortem missing incident_id", () => {
+    write(
+      "docs/postmortems/PM-2026-001-stale-panel-rca.md",
+      `---
+title: "PM-2026-001: Stale panel RCA"
+type: postmortem
+id: PM-2026-001
+status: draft
+summary: "Cache TTL too long"
+updated: 2026-06-22
+---
+
+# PM-2026-001: Stale panel RCA
+`,
+    );
+    expect(messages()).toContain('missing required field "incident_id"');
+  });
 });
 
 describe("lintDocs — body structure", () => {
@@ -263,6 +353,57 @@ describe("lintDocs — ADR index sync", () => {
     expect(
       messages().some((m) =>
         m.includes('front-matter id "ADR-0009" does not match filename number 0001'),
+      ),
+    ).toBe(true);
+  });
+});
+
+describe("lintDocs — incident and postmortem sync", () => {
+  const VALID_INCIDENT = `---
+title: "INC-2026-001: Stale panel"
+type: incident-report
+id: INC-2026-001
+status: resolved
+severity: medium
+summary: "Users see old data"
+updated: 2026-06-22
+---
+
+# INC-2026-001: Stale panel
+`;
+
+  it("flags an incident id that disagrees with the filename", () => {
+    write(
+      "docs/incident-reports/INC-2026-001-stale-panel.md",
+      VALID_INCIDENT.replace("id: INC-2026-001", "id: INC-2026-009"),
+    );
+    expect(
+      messages().some((m) =>
+        m.includes('front-matter id "INC-2026-009" does not match filename (expected "INC-2026-001")'),
+      ),
+    ).toBe(true);
+  });
+
+  it("flags a postmortem whose incident_id is missing", () => {
+    write("docs/incident-reports/INC-2026-001-stale-panel.md", VALID_INCIDENT);
+    write(
+      "docs/postmortems/PM-2026-001-stale-panel-rca.md",
+      `---
+title: "PM-2026-001: Stale panel RCA"
+type: postmortem
+id: PM-2026-001
+incident_id: INC-2026-099
+status: draft
+summary: "Cache TTL too long"
+updated: 2026-06-22
+---
+
+# PM-2026-001: Stale panel RCA
+`,
+    );
+    expect(
+      messages().some((m) =>
+        m.includes('incident_id "INC-2026-099" does not match any incident report id'),
       ),
     ).toBe(true);
   });

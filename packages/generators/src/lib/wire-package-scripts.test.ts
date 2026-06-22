@@ -35,6 +35,8 @@ describe("wirePackageScripts", () => {
 
     const result = wirePackageScripts(target);
     expect(result.added).toContain("gen:scaffold-docs");
+    expect(result.added).toContain("gen:create-incident-report");
+    expect(result.added).toContain("gen:create-postmortem");
     expect(result.skipped).not.toContain("lint");
 
     const pkg = JSON.parse(readFileSync(join(target, "package.json"), "utf8")) as {

@@ -44,7 +44,8 @@ Typical baseline when the framework ships with enforcement (AF-5):
 - **Tests:** Vitest (TS/ESM-native).
 - **Hooks/commits:** husky + lint-staged; commitlint + Conventional Commits.
 - **Docs lint:** custom **doc-linter** validates front-matter schema, ISO dates,
-  ADR-index sync, relative links. Markdown **style** is Prettier's job.
+  ADR-index sync, incident/postmortem id sync, relative links. Markdown **style**
+  is Prettier's job.
 
 ## 4. Schemas
 
@@ -71,8 +72,8 @@ Projects may add optional local rules for code conventions — not part of the p
 - **`create-adr`** — next-numbered ADR from template (+ index row).
 - **`add-diary-entry`** — appends a well-formed diary entry.
 - **`create-feature-spec`** — scope doc under `docs/specs/features/` (**doc only**).
-- **`create-incident-report`** — new incident report when user reports a bug (**before** fixing).
-- **`create-postmortem`** — post-incident write-up (**after** fix, with user permission).
+- **`create-incident-report`** — next `INC-YYYY-NNN` incident report (**before** fixing).
+- **`create-postmortem`** — post-incident write-up linked to an incident (**after** fix, with user permission).
 
 ### 6.1 Reusable cross-agent scaffold
 
@@ -103,20 +104,19 @@ Conventions in **`docs/specs/features/README.md`**.
 CI is the merge authority. Protect `main` via branch policy or a pre-push hook.
 
 The doc-linter fails on: invalid front-matter; non-ISO dates; wrong heading count;
-broken relative links; ADR index drift. No diary index — prior context via search.
+broken relative links; ADR index drift; incident/postmortem id↔filename sync and
+postmortem↔incident links. No diary or incident index — prior context via search.
 
 ## 9. Incident response workflow
 
 When a user reports a bug or corrupt data:
 
-1. **Incident report first** — create `docs/incident-reports/INC-YYYY-NNN-*.md`
-   (`type: incident-report`) before code or data fixes. Skill:
-   `create-incident-report`.
+1. **Incident report first** — run `pnpm gen:create-incident-report` (skill:
+   `create-incident-report`) before code or data fixes.
 2. **Investigate and fix** — update incident `status` (`open` → `investigating` →
    `resolved`).
-3. **Postmortem after fix** — ask the user for permission, then create
-   `docs/postmortems/PM-YYYY-NNN-*.md` linked to the incident. Skill:
-   `create-postmortem`.
+3. **Postmortem after fix** — ask the user for permission, then run
+   `pnpm gen:create-postmortem` (skill: `create-postmortem`).
 
 No index tables for incidents or postmortems — search by `INC-` / `PM-` id or slug.
 Front-matter types `incident-report` and `postmortem` are validated by the doc-linter

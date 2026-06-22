@@ -31,3 +31,7 @@ The `docs/` tree is the project's memory. Read order and rules live in
 - **Keep TODO and backlog in sync.** Copy/break down backlog items into
   `docs/TODO.md`; mark a backlog item `completed` only when its TODO work closes
   it. The backlog is durable — never delete from it.
+- **Incidents: report before fix.** User-reported bugs → run
+  `pnpm gen:create-incident-report` first (`docs/incident-reports/`, skill
+  `create-incident-report`). Postmortem only after fix and with user permission
+  (`pnpm gen:create-postmortem`, skill `create-postmortem`).

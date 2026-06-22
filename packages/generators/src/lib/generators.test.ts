@@ -6,6 +6,12 @@ import { afterEach, describe, expect, it } from "vitest";
 import { createAdr, nextAdrNumber, slugifyAdrTitle } from "./adr.ts";
 import { copyTreeWithTemplates } from "./copy-tree.ts";
 import { createFeatureSpec, validateFeatureSpecSlug } from "./feature-spec.ts";
+import {
+  createIncidentReport,
+  incidentId,
+  nextIncidentNumber,
+} from "./incident-report.ts";
+import { createPostmortem, nextPostmortemNumber } from "./postmortem.ts";
 import { fillTemplate } from "./template.ts";
 
 const tempDirs: string[] = [];
@@ -187,5 +193,138 @@ backlog_ids: [{{BACKLOG_ID}}]
   it("rejects invalid slugs", () => {
     expect(validateFeatureSpecSlug("Bill-Listing")).toBe(false);
     expect(validateFeatureSpecSlug("bill-listing")).toBe(true);
+  });
+});
+
+describe("nextIncidentNumber", () => {
+  it("returns 001 for an empty incidents dir", () => {
+    const dir = makeTempDir();
+    expect(nextIncidentNumber(dir, "2026")).toBe("001");
+  });
+
+  it("increments within the same year", () => {
+    const dir = makeTempDir();
+    writeFileSync(join(dir, "INC-2026-001-first.md"), "# INC\n");
+    writeFileSync(join(dir, "INC-2026-003-third.md"), "# INC\n");
+    expect(nextIncidentNumber(dir, "2026")).toBe("004");
+  });
+
+  it("ignores incidents from other years", () => {
+    const dir = makeTempDir();
+    writeFileSync(join(dir, "INC-2025-099-old.md"), "# INC\n");
+    expect(nextIncidentNumber(dir, "2026")).toBe("001");
+  });
+});
+
+describe("createIncidentReport", () => {
+  it("writes an incident report under docs/incident-reports/", () => {
+    const root = makeTempDir();
+    const templatePath = join(root, "incident-template.md");
+    writeFileSync(
+      templatePath,
+      `---
+title: "{{INC_ID}}: {{TITLE}}"
+type: incident-report
+id: {{INC_ID}}
+status: {{STATUS}}
+severity: {{SEVERITY}}
+summary: "{{SUMMARY}}"
+updated: {{DATE}}
+{{BACKLOG_IDS_LINE}}---
+
+# {{INC_ID}}: {{TITLE}}
+`,
+      "utf8",
+    );
+
+    const filePath = createIncidentReport({
+      repoRoot: root,
+      templatePath,
+      title: "Stale panel",
+      slug: "stale-panel",
+      severity: "high",
+      summary: "Users see old data",
+      status: "open",
+      date: "2026-06-22",
+      year: "2026",
+      backlogId: "PROJ-1",
+    });
+
+    expect(filePath).toBe(join(root, "docs/incident-reports/INC-2026-001-stale-panel.md"));
+    expect(readFileSync(filePath, "utf8")).toContain(`id: ${incidentId("2026", "001")}`);
+    expect(readFileSync(filePath, "utf8")).toContain("backlog_ids: [PROJ-1]");
+  });
+});
+
+describe("createPostmortem", () => {
+  it("writes a postmortem linked to an existing incident", () => {
+    const root = makeTempDir();
+    const incidentsDir = join(root, "docs/incident-reports");
+    mkdirSync(incidentsDir, { recursive: true });
+    writeFileSync(join(incidentsDir, "INC-2026-002-stale-panel.md"), "# incident\n", "utf8");
+
+    const templatePath = join(root, "postmortem-template.md");
+    writeFileSync(
+      templatePath,
+      `---
+title: "{{PM_ID}}: {{TITLE}}"
+type: postmortem
+id: {{PM_ID}}
+incident_id: {{INC_ID}}
+status: {{STATUS}}
+summary: "{{SUMMARY}}"
+updated: {{DATE}}
+---
+
+# {{PM_ID}}: {{TITLE}}
+
+[{{INC_ID}}]({{INC_LINK}})
+`,
+      "utf8",
+    );
+
+    const filePath = createPostmortem({
+      repoRoot: root,
+      templatePath,
+      incidentId: "INC-2026-002",
+      title: "Stale panel RCA",
+      slug: "stale-panel-rca",
+      summary: "Cache TTL too long",
+      status: "draft",
+      date: "2026-06-22",
+    });
+
+    expect(filePath).toBe(join(root, "docs/postmortems/PM-2026-002-stale-panel-rca.md"));
+    expect(readFileSync(filePath, "utf8")).toContain("incident_id: INC-2026-002");
+    expect(readFileSync(filePath, "utf8")).toContain(
+      "](../incident-reports/INC-2026-002-stale-panel.md)",
+    );
+  });
+
+  it("rejects a missing incident report", () => {
+    const root = makeTempDir();
+    const templatePath = join(root, "postmortem-template.md");
+    writeFileSync(templatePath, "# {{PM_ID}}\n", "utf8");
+
+    expect(() =>
+      createPostmortem({
+        repoRoot: root,
+        templatePath,
+        incidentId: "INC-2026-001",
+        title: "Ghost",
+        slug: "ghost",
+        summary: "n/a",
+        status: "draft",
+        date: "2026-06-22",
+      }),
+    ).toThrow(/incident report not found/);
+  });
+});
+
+describe("nextPostmortemNumber", () => {
+  it("increments within the same year", () => {
+    const dir = makeTempDir();
+    writeFileSync(join(dir, "PM-2026-001-a.md"), "# PM\n");
+    expect(nextPostmortemNumber(dir, "2026")).toBe("002");
   });
 });

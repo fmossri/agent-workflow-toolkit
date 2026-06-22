@@ -37,7 +37,7 @@ function main(): void {
   const projectName = requireFlag(flags, "project-name");
   const projectDescription = requireFlag(flags, "project-description");
   const force = "force" in flags && flags.force === true;
-  const wireScripts = !("no-wire-scripts" in flags && flags.no-wire-scripts === true);
+  const wireScripts = !("no-wire-scripts" in flags && flags["no-wire-scripts"] === true);
   const scaffoldCursor = shouldScaffoldCursor(flags);
   const date = new Date().toISOString().slice(0, 10);
 

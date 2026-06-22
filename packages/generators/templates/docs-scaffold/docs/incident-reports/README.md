@@ -18,6 +18,9 @@ the user explicitly requests).
 
 Use the **`create-incident-report`** skill (`.cursor/skills/create-incident-report/`).
 
+Run `pnpm gen:create-incident-report --title "…" --summary "…"` — do not hand-number
+`INC-YYYY-NNN` ids.
+
 ## File naming
 
 `INC-YYYY-NNN-short-slug.md` — zero-padded sequence per year (e.g.

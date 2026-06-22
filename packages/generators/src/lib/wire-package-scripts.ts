@@ -10,6 +10,10 @@ export const TOOLKIT_PACKAGE_SCRIPTS: Readonly<Record<string, string>> = {
   "gen:diary-entry": "tsx node_modules/@agent-workflow/generators/src/add-diary-entry.ts",
   "gen:create-feature-spec":
     "tsx node_modules/@agent-workflow/generators/src/create-feature-spec.ts",
+  "gen:create-incident-report":
+    "tsx node_modules/@agent-workflow/generators/src/create-incident-report.ts",
+  "gen:create-postmortem":
+    "tsx node_modules/@agent-workflow/generators/src/create-postmortem.ts",
 };
 
 export interface WirePackageScriptsResult {
