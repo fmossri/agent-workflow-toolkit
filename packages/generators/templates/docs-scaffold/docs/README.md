@@ -19,6 +19,10 @@ docs/
 │   └── README.md        ← ADR index + how to write one
 ├── agent-diaries/       ← per-agent diaries (working memory)
 │   └── README.md        ← diary rules
+├── incident-reports/    ← user-reported bugs/data issues (write before fixing)
+│   └── README.md
+├── postmortems/         ← after-incident analysis (after fix, with permission)
+│   └── README.md
 ├── requirements.md      ← functional + non-functional requirements, scope
 ├── specs/               ← cross-cutting specifications
 │   └── README.md        ← spec index + when to create a new spec

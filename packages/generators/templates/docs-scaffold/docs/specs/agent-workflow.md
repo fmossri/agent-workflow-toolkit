@@ -71,6 +71,8 @@ Projects may add optional local rules for code conventions — not part of the p
 - **`create-adr`** — next-numbered ADR from template (+ index row).
 - **`add-diary-entry`** — appends a well-formed diary entry.
 - **`create-feature-spec`** — scope doc under `docs/specs/features/` (**doc only**).
+- **`create-incident-report`** — new incident report when user reports a bug (**before** fixing).
+- **`create-postmortem`** — post-incident write-up (**after** fix, with user permission).
 
 ### 6.1 Reusable cross-agent scaffold
 
@@ -102,3 +104,20 @@ CI is the merge authority. Protect `main` via branch policy or a pre-push hook.
 
 The doc-linter fails on: invalid front-matter; non-ISO dates; wrong heading count;
 broken relative links; ADR index drift. No diary index — prior context via search.
+
+## 9. Incident response workflow
+
+When a user reports a bug or corrupt data:
+
+1. **Incident report first** — create `docs/incident-reports/INC-YYYY-NNN-*.md`
+   (`type: incident-report`) before code or data fixes. Skill:
+   `create-incident-report`.
+2. **Investigate and fix** — update incident `status` (`open` → `investigating` →
+   `resolved`).
+3. **Postmortem after fix** — ask the user for permission, then create
+   `docs/postmortems/PM-YYYY-NNN-*.md` linked to the incident. Skill:
+   `create-postmortem`.
+
+No index tables for incidents or postmortems — search by `INC-` / `PM-` id or slug.
+Front-matter types `incident-report` and `postmortem` are validated by the doc-linter
+schema (AF-7).

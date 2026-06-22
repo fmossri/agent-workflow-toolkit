@@ -18,13 +18,15 @@
         "architecture",
         "backlog",
         "todo",
-        "feature-spec"
+        "feature-spec",
+        "incident-report",
+        "postmortem"
       ]
     },
     "status": { "type": "string" },
     "updated": { "type": "string", "format": "date" },
     "date": { "type": "string", "format": "date" },
-    "id": { "type": "string", "pattern": "^ADR-[0-9]{4}$" },
+    "id": { "type": "string", "minLength": 1 },
     "deciders": {
       "type": "array",
       "minItems": 1,
@@ -56,6 +58,14 @@
       "type": "array",
       "minItems": 1,
       "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9]*-[0-9]+$" }
+    },
+    "incident_id": {
+      "type": "string",
+      "pattern": "^INC-[0-9]{4}-[0-9]{3}$"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
     }
   },
   "allOf": [
@@ -73,7 +83,8 @@
           "superseded_by"
         ],
         "properties": {
-          "status": { "enum": ["Proposed", "Accepted", "Superseded", "Deprecated"] }
+          "status": { "enum": ["Proposed", "Accepted", "Superseded", "Deprecated"] },
+          "id": { "type": "string", "pattern": "^ADR-[0-9]{4}$" }
         }
       }
     },
@@ -98,6 +109,26 @@
         "required": ["title", "type", "updated", "backlog_ids", "status"],
         "properties": {
           "status": { "enum": ["Draft", "Active", "Completed", "Superseded"] }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "incident-report" } }, "required": ["type"] },
+      "then": {
+        "required": ["title", "type", "id", "status", "severity", "summary", "updated"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^INC-[0-9]{4}-[0-9]{3}$" },
+          "status": { "enum": ["open", "investigating", "resolved"] }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "postmortem" } }, "required": ["type"] },
+      "then": {
+        "required": ["title", "type", "id", "incident_id", "status", "summary", "updated"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^PM-[0-9]{4}-[0-9]{3}$" },
+          "status": { "enum": ["draft", "published"] }
         }
       }
     },

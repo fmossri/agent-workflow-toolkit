@@ -37,7 +37,12 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
      replace existing real docs).
 4. Check the current work: [`docs/TODO.md`](docs/TODO.md) (today's working set)
    and [`docs/backlog.md`](docs/backlog.md) (the full backlog).
-5. **One feature per session** (after kickstart). Scope work with
+5. **Incident reported?** If the user reports a bug or bad data, **create an incident
+   report first** ([`docs/incident-reports/`](docs/incident-reports/README.md),
+   skill: `create-incident-report`) — before fixing. After the fix is verified,
+   **ask the user for permission**, then write a postmortem ([`docs/postmortems/`](docs/postmortems/README.md),
+   skill: `create-postmortem`).
+6. **One feature per session** (after kickstart). Scope work with
    `pnpm gen:create-feature-spec`; see [`docs/specs/features/README.md`](docs/specs/features/README.md).
 
 ## While you work
@@ -68,6 +73,8 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
 | [`docs/kickstart.md`](docs/kickstart.md)              | Greenfield content bootstrap (AF-9)                  |
 | [`docs/adr/`](docs/adr/README.md)                     | Architecture Decision Records (binding decisions)    |
 | [`docs/agent-diaries/`](docs/agent-diaries/README.md) | Per-agent diaries (working memory; found via search) |
+| [`docs/incident-reports/`](docs/incident-reports/README.md) | Bug/data incidents — write **before** fixing |
+| [`docs/postmortems/`](docs/postmortems/README.md) | Post-incident write-ups — **after** fix, with permission |
 | [`docs/requirements.md`](docs/requirements.md)        | Requirements + scope                                 |
 | [`docs/specs/`](docs/specs/README.md)                 | Cross-cutting specs                                  |
 | [`docs/specs/features/`](docs/specs/features/README.md) | Per-feature session specs                          |
