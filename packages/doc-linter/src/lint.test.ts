@@ -379,7 +379,9 @@ updated: 2026-06-22
     );
     expect(
       messages().some((m) =>
-        m.includes('front-matter id "INC-2026-009" does not match filename (expected "INC-2026-001")'),
+        m.includes(
+          'front-matter id "INC-2026-009" does not match filename (expected "INC-2026-001")',
+        ),
       ),
     ).toBe(true);
   });

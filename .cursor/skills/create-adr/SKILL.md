@@ -11,6 +11,23 @@ description: >-
 Do not hand-number ADRs or edit the index manually — run the generator so the
 doc-linter's ADR-index sync check passes.
 
+## Step 0 — Owner participation (required)
+
+Do **not** run `pnpm gen:create-adr` until the owner has confirmed the direction
+**in this session's conversation**, unless:
+
+- the owner's message explicitly states the chosen direction, or
+- a prior HANDOFF explicitly says **"direction approved:"** with the decision stated
+  (not merely "implement ADR-NNNN" or "pick among X/Y").
+
+Before Step 0:
+
+1. Present **context**, **alternatives**, pros/cons, and your **recommendation**.
+2. **Wait for owner participation** — confirm, adjust, or pick an option.
+
+Backlog notes, architecture "proposed" sections, and HANDOFF carry-forward text are
+**context**, not permission to decide alone.
+
 ## Run the generator
 
 From the **consumer project** root (requires `@agent-workflow/generators` installed):
@@ -24,16 +41,20 @@ pnpm gen:create-adr \
 ```
 
 - **`--slug`** defaults to a kebab-case slug derived from `--title`.
-- **`--status`**: `Proposed` (default), `Accepted`, `Superseded`, or `Deprecated`.
+- **`--status`**: default **`Proposed`**. Only use `Accepted` if the owner
+  explicitly requests it in chat — merge is the normal acceptance gate.
 - **`--date`**: defaults to today (ISO `YYYY-MM-DD`).
+
+Same-session **Proposed ADR + implementation** is fine after Step 0 passes.
 
 ## After generation
 
-1. Fill in **Context**, **Decision**, **Alternatives considered**, and **Consequences**.
+1. Fill in **Context**, **Decision**, **Alternatives considered**, and **Consequences**
+   (reflect the discussion the owner participated in).
 2. Run `pnpm doc-lint` — it validates front-matter and index↔file sync.
-3. Run `pnpm format`.
+3. Run `pnpm format` when Prettier is wired.
 
 ## Rules
 
 - Never edit an `Accepted` ADR to reverse a decision — supersede it with a new ADR.
-- Process and template reference: `docs/adr/README.md`.
+- Process and participation gate: `docs/adr/README.md`.

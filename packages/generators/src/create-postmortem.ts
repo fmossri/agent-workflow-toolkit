@@ -4,11 +4,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { flagOrDefault, parseArgs, requireFlag } from "./lib/args.ts";
-import {
-  createPostmortem,
-  readIncidentStatus,
-  slugifyPostmortemTitle,
-} from "./lib/postmortem.ts";
+import { createPostmortem, readIncidentStatus, slugifyPostmortemTitle } from "./lib/postmortem.ts";
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -74,9 +70,7 @@ function main(): void {
       "Next: fill Summary/Timeline/Root cause/Resolution/Verification/Prevention, then run pnpm doc-lint.",
     );
   } catch (error) {
-    console.error(
-      `create-postmortem: ${error instanceof Error ? error.message : String(error)}`,
-    );
+    console.error(`create-postmortem: ${error instanceof Error ? error.message : String(error)}`);
     process.exitCode = 1;
   }
 }

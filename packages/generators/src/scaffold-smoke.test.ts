@@ -48,10 +48,9 @@ describe("scaffold-docs-structure (consumer smoke)", () => {
     runScaffold(target, "--with-cursor");
 
     expect(existsSync(join(target, ".cursor/rules/git-workflow.mdc"))).toBe(true);
+    expect(existsSync(join(target, ".cursor/rules/owner-participation.mdc"))).toBe(true);
     expect(existsSync(join(target, ".cursor/skills/create-adr/SKILL.md"))).toBe(true);
-    expect(existsSync(join(target, ".cursor/skills/create-incident-report/SKILL.md"))).toBe(
-      true,
-    );
+    expect(existsSync(join(target, ".cursor/skills/create-incident-report/SKILL.md"))).toBe(true);
     expect(existsSync(join(target, ".cursor/skills/create-postmortem/SKILL.md"))).toBe(true);
     expect(existsSync(join(target, "docs/incident-reports/README.md"))).toBe(true);
     expect(existsSync(join(target, "docs/postmortems/README.md"))).toBe(true);
@@ -73,9 +72,7 @@ describe("scaffold-docs-structure (consumer smoke)", () => {
 
     runScaffold(target, "--with-cursor");
 
-    expect(readFileSync(join(target, ".cursor/rules/git-workflow.mdc"), "utf8")).toBe(
-      "CUSTOM\n",
-    );
+    expect(readFileSync(join(target, ".cursor/rules/git-workflow.mdc"), "utf8")).toBe("CUSTOM\n");
     expect(existsSync(join(target, ".cursor/rules/kickstart.mdc"))).toBe(true);
   });
 });

@@ -81,14 +81,21 @@ Import via **degit** (wrapper 2) or **Cursor skill** (wrapper 1) — same templa
 same generator. See `docs/kickstart.md` § "How to import the framework".
 
 **Kickstart:** phase A (structure adoption) + phase B (content bootstrap, user opt-in).
+Phase B starts with a **requirements elicitation interview** with the owner — see
+`docs/kickstart.md` § Step 1.
 
 ## 7. One-agent-per-feature workflow
 
 Conventions in **`docs/specs/features/README.md`**.
 
 - One backlog item → one feature spec → one branch → one PR.
-- Acceptance criteria use **`gate:`**, **`structural:`**, **`behavior:`** prefixes.
+- Acceptance criteria use **`gate:`**, **`structural:`**, **`behavior:`**, and
+  **`owner:`** (ADR/decision sessions) prefixes.
+- **ADR participation:** present alternatives → owner confirms → `Proposed` ADR →
+  implement if scoped → owner `Accepted` at merge (`docs/adr/README.md`).
 - Structural criteria reference **this project's** architecture, not framework defaults.
+- **Session closeout:** detailed summary; ask owner permission before commit/push/PR
+  (`AGENTS.md` § End of session).
 
 ## 8. Enforcement matrix
 

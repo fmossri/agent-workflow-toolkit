@@ -6,11 +6,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { createAdr, nextAdrNumber, slugifyAdrTitle } from "./adr.ts";
 import { copyTreeWithTemplates } from "./copy-tree.ts";
 import { createFeatureSpec, validateFeatureSpecSlug } from "./feature-spec.ts";
-import {
-  createIncidentReport,
-  incidentId,
-  nextIncidentNumber,
-} from "./incident-report.ts";
+import { createIncidentReport, incidentId, nextIncidentNumber } from "./incident-report.ts";
 import { createPostmortem, nextPostmortemNumber } from "./postmortem.ts";
 import { fillTemplate } from "./template.ts";
 

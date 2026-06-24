@@ -15,7 +15,7 @@ backlog_ids: [{{BACKLOG_ID}}]
 ## Acceptance criteria
 
 Check each item before opening the PR. Use the **gate:** / **structural:** /
-**behavior:** prefixes — see `docs/specs/features/README.md`.
+**behavior:** / **owner:** prefixes — see `docs/specs/features/README.md`.
 
 ### Gates
 
@@ -23,6 +23,11 @@ Check each item before opening the PR. Use the **gate:** / **structural:** /
 - [ ] **gate:** `pnpm typecheck` passes
 - [ ] **gate:** `pnpm test` passes
 - [ ] **gate:** `pnpm doc-lint` passes (when docs under `docs/` or `AGENTS.md` changed)
+
+### Owner (ADR / decision sessions — delete if N/A)
+
+- [ ] **owner:** Alternatives and recommendation presented; owner confirmed direction before ADR file created
+- [ ] **owner:** Binding edits (deps, infra, schema) only after owner participation in this session
 
 ### Structural
 

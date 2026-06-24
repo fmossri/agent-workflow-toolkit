@@ -4,10 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { flagOrDefault, parseArgs, requireFlag } from "./lib/args.ts";
-import {
-  createIncidentReport,
-  slugifyIncidentTitle,
-} from "./lib/incident-report.ts";
+import { createIncidentReport, slugifyIncidentTitle } from "./lib/incident-report.ts";
 
 const PACKAGE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -57,9 +54,7 @@ function main(): void {
       ...(backlogId.length > 0 ? { backlogId } : {}),
     });
     console.log(`create-incident-report: wrote ${filePath}`);
-    console.log(
-      "Next: fill Reported/Impact/Observations/Hypotheses, then run pnpm doc-lint.",
-    );
+    console.log("Next: fill Reported/Impact/Observations/Hypotheses, then run pnpm doc-lint.");
   } catch (error) {
     console.error(
       `create-incident-report: ${error instanceof Error ? error.message : String(error)}`,

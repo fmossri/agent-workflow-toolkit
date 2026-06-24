@@ -102,9 +102,7 @@ function main(): void {
       console.log(`  package.json scripts added: ${scriptsAdded.join(", ")}`);
     }
     if (scriptsSkipped.length > 0) {
-      console.log(
-        `  package.json scripts already present: ${scriptsSkipped.join(", ")}`,
-      );
+      console.log(`  package.json scripts already present: ${scriptsSkipped.join(", ")}`);
     }
   }
 

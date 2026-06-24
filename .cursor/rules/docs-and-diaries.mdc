@@ -14,16 +14,13 @@ The `docs/` tree is the project's memory. Read order and rules live in
   machine-checked by the AF-6 doc linter (`pnpm doc-lint`) against
   `node_modules/@agent-workflow/doc-linter/front-matter.schema.json` (field rules in
   `docs/specs/agent-workflow.md` §4). Dates are ISO (`YYYY-MM-DD`).
-- **Diaries: knowledge, not a journal.** Record what a future agent would pay to
-  rediscover (quirks, dead ends, non-obvious trade-offs) — not a play-by-play of
-  edits. One diary per session under `docs/agent-diaries/`; never edit another
-  agent's diary. End a session with a ` — HANDOFF` entry if work continues. There
-  is **no diary index** — prior context is found by search. Rules:
-  `docs/agent-diaries/README.md` (ADR-0008).
-- **Decisions are ADRs.** Architectural/cross-cutting decisions become ADRs (don't
-  reverse an `Accepted` one — supersede it). Process + template + index:
-  `docs/adr/README.md`. When you add/supersede an ADR, update the index table
-  (the linter checks index↔file sync).
+- **Diaries: knowledge, not a journal — but raise the bar.** Record what a future
+  agent would pay to rediscover (alternatives, gotchas, do-NOTs) — not a play-by-play.
+  HANDOFF is not a substitute for diary depth. Rules: `docs/agent-diaries/README.md`
+  (ADR-0008).
+- **Decisions are ADRs — owner participates first.** Present options, wait for owner
+  input, then record `Proposed` and implement if scoped. Only the owner sets
+  `Accepted`. Process: `docs/adr/README.md`; always-on gate: `.cursor/rules/owner-participation.mdc`.
 - **Link, don't duplicate** — one source of truth per fact, and relative links
   must resolve (the linter checks this).
 - **Feature specs** scope one backlog item per session (`docs/specs/features/`).

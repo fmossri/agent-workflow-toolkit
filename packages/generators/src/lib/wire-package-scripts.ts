@@ -4,16 +4,14 @@ import { join } from "node:path";
 /** Root `package.json` scripts merged by scaffold-docs (only missing keys). */
 export const TOOLKIT_PACKAGE_SCRIPTS: Readonly<Record<string, string>> = {
   "doc-lint": "tsx node_modules/@agent-workflow/doc-linter/src/cli.ts",
-  "gen:scaffold-docs":
-    "tsx node_modules/@agent-workflow/generators/src/scaffold-docs-structure.ts",
+  "gen:scaffold-docs": "tsx node_modules/@agent-workflow/generators/src/scaffold-docs-structure.ts",
   "gen:create-adr": "tsx node_modules/@agent-workflow/generators/src/create-adr.ts",
   "gen:diary-entry": "tsx node_modules/@agent-workflow/generators/src/add-diary-entry.ts",
   "gen:create-feature-spec":
     "tsx node_modules/@agent-workflow/generators/src/create-feature-spec.ts",
   "gen:create-incident-report":
     "tsx node_modules/@agent-workflow/generators/src/create-incident-report.ts",
-  "gen:create-postmortem":
-    "tsx node_modules/@agent-workflow/generators/src/create-postmortem.ts",
+  "gen:create-postmortem": "tsx node_modules/@agent-workflow/generators/src/create-postmortem.ts",
 };
 
 export interface WirePackageScriptsResult {

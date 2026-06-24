@@ -9,9 +9,7 @@ export function isCursorEnvironment(): boolean {
   return false;
 }
 
-export function shouldScaffoldCursor(
-  flags: Readonly<Record<string, string | true>>,
-): boolean {
+export function shouldScaffoldCursor(flags: Readonly<Record<string, string | true>>): boolean {
   if (flags["no-cursor"] === true) return false;
   if (flags["with-cursor"] === true) return true;
   return isCursorEnvironment();

@@ -42,7 +42,9 @@ Or `pnpm gen:scaffold-docs …` after the first run wires scripts.
 
 Offer content bootstrap when **both** are true:
 
-- `docs/requirements.md` still contains `_Define MVP scope here._` and/or empty FR/NFR tables.
+- `docs/requirements.md` still contains scaffold sentinels such as
+  `_Define MVP scope here._`, `_One-line MVP definition._`, empty FR/NFR tables,
+  or `_List operating assumptions`.
 - `docs/backlog.md` still matches the scaffold template (empty milestone table, no real items).
 
 If real content already exists, bootstrap means **merge/draft** — never wholesale replace
@@ -50,8 +52,20 @@ an existing `architecture.md`, `requirements.md`, or similar.
 
 ## Phase B sequence (user opt-in)
 
-Requirements elicitation → specification → architecture → ADRs → backlog → TODO → diary
-` — HANDOFF`. See `docs/kickstart.md` for the step table.
+**Requirements elicitation is an owner interview** — ask detailed questions; capture in
+your diary; draft `requirements.md` only after elicitation; get owner approval before
+architecture. Full interview outline: `docs/kickstart.md` § Step 1.
+
+Then continue through the **full bootstrap sequence** (each step: draft → owner approval → next):
+
+1. `requirements.md` (§ Steps 1–2)
+2. `architecture.md` (§ Step 3)
+3. ADRs for open/deferred decisions (§ Step 4)
+4. `backlog.md` with milestone IDs (§ Step 5)
+5. `TODO.md` first working slice (§ Step 6)
+6. Diary ` — HANDOFF` (§ Step 7)
+
+Phase B is not done until requirements, architecture, and backlog are populated.
 
 ## After kickstart
 

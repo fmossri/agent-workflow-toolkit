@@ -22,5 +22,8 @@ process, acceptance-criteria patterns, and branch naming:
   (when docs changed) must pass — see the **gate:** criteria in the spec template.
 - **Status lifecycle:** `Draft` → `Active` (implementation started) → `Completed`
   (merged). Set `Completed` when the owner merges; mark the backlog item done.
+- **Session closeout.** End with a detailed summary (goal, changes, gates, remaining
+  work). Ask the owner for permission before commit, push, or PR — see `AGENTS.md`
+  § End of session and `.cursor/rules/git-workflow.mdc`.
 
 Structural criteria reference **this project's** architecture, not a toolkit default.

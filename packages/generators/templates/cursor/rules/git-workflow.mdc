@@ -15,3 +15,7 @@ Source of truth: `docs/adr/0005-agent-git-governance-and-workflow.md` (when pres
 - **Never push to or merge into `main`.** Push your feature branch and open a PR;
   the owner reviews and merges. Use client-side hooks when present; do not bypass
   them with `--no-verify` unless the user explicitly asks.
+- **No commits or PRs without owner permission.** Do not run `git commit`,
+  `git push`, or `gh pr create` unless the owner explicitly asks — typically after
+  your session-end summary. Propose the commit message and PR body first; wait for
+  approval before executing.

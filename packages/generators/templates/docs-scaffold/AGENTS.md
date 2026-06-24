@@ -52,7 +52,11 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
   worth re-deriving, not a play-by-play** of what you edited.
 - **End with a handoff.** If a clear next workstream remains at session end, close
   your diary with a ` — HANDOFF` entry so the next agent can start cold.
-- **Record real decisions as ADRs.** Use the `create-adr` generator or follow
+- **ADR-worthy decisions — owner participates first.** Do not choose among
+  alternatives on your own. Present context, options, and a recommendation; **wait
+  for owner participation** before writing the ADR or binding artifacts (deps,
+  infra, schema). Same-session `Proposed` ADR + implementation is fine after that.
+  Only the owner sets `Accepted` (merge or explicit in-chat). See
   [`docs/adr/README.md`](docs/adr/README.md).
 - **Propose new specs proactively.** When a subject becomes concrete enough to
   deserve its own document, create it under [`docs/specs/`](docs/specs/README.md).
@@ -64,6 +68,17 @@ Entry point for any AI agent (or human) working in this repository. **Read this 
   when present; `.cursor/rules/pattern-promotion.mdc` when scaffolded.
 - **Keep TODO and backlog in sync.** Copy backlog items into `docs/TODO.md`; mark
   a backlog item `completed` only when its TODO work closes it.
+
+## End of session
+
+Before stopping:
+
+1. **Summarize your work in detail** — goal for the session, what changed (files,
+   behavior, docs), which gates passed, open questions, and what remains.
+2. **Hand off** — if work continues, close your diary with a ` — HANDOFF` entry.
+3. **Ask the owner for permission** before `git commit`, `git push`, or opening a
+   PR. Do not commit or open a PR unless explicitly asked. When permitted, propose
+   a commit message and PR summary first and wait for approval.
 
 ## Documentation map
 

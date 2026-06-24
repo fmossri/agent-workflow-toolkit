@@ -1,0 +1,17 @@
+---
+description: Owner must participate before ADR-worthy decisions are recorded or implemented
+alwaysApply: true
+---
+
+# Owner participation on decisions
+
+For ADR-worthy or binding architectural choices: **STOP** before `pnpm gen:create-adr`,
+binding dependency/infra edits, or treating backlog / HANDOFF / architecture "proposed"
+text as already decided.
+
+Present context, options, and a recommendation; **wait for owner participation in
+this thread**. Then record a `Proposed` ADR and implement if scoped. Only the owner
+sets `Accepted`.
+
+Same pattern as incident, postmortem, and pattern-promotion gates — see
+`docs/adr/README.md`.

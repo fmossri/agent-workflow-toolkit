@@ -26,10 +26,7 @@ function parseIncidentId(incidentId: string): { readonly year: string; readonly 
   return { year: match[1], num: match[2] };
 }
 
-function findIncidentReportPath(
-  incidentsDir: string,
-  incidentId: string,
-): string | undefined {
+function findIncidentReportPath(incidentsDir: string, incidentId: string): string | undefined {
   if (!existsSync(incidentsDir)) {
     return undefined;
   }

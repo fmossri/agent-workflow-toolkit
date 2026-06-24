@@ -35,14 +35,31 @@ Process authority: git/PR policy (record as ADR-0005 during kickstart) and
 3. **Fill the feature spec** — structural/behavioral acceptance criteria, touched paths,
    out-of-scope notes. Set `status: Active` when implementation starts.
 4. **Implement** until every acceptance criterion is checked and all gates pass.
-5. **Open a PR** from `feat/<backlog-id>-<slug>` — never push to `main`. Reference
-   the backlog ID in commits and the PR body.
-6. **Close the loop** — when the owner merges, set the feature spec to
+5. **Session closeout** — summarize work in detail (goal, changes, gates, remaining
+   work). Ask the owner for permission before commit, push, or PR; propose commit
+   message and PR body first (`AGENTS.md` § End of session).
+6. **Open a PR** (only after owner permission) from `feat/<backlog-id>-<slug>` — never
+   push to `main`. Reference the backlog ID in commits and the PR body.
+7. **Close the loop** — when the owner merges, set the feature spec to
    `status: Completed` and mark the backlog item `completed` in
    [`backlog.md`](../../backlog.md).
 
 Start a diary ([`docs/agent-diaries/`](../../agent-diaries/README.md)), read the
 latest diary's ` — HANDOFF` entry, and end with your own handoff if work continues.
+
+### ADR / decision sessions
+
+When the backlog item is an ADR (e.g. "Decide X → ADR"), follow the **participation
+workflow** in [`docs/adr/README.md`](../../adr/README.md) before `gen:create-adr`.
+Present alternatives in chat; wait for owner input; then record `Proposed` and
+implement if scoped.
+
+### HANDOFF and owner-confirmed decisions
+
+HANDOFF may carry forward **owner-confirmed** decisions only. Do not write HANDOFF
+as if architectural choices are settled when the owner has not participated. If the
+next session requires an ADR, say **"first turn: present ADR proposal to owner"** —
+not "implement ADR-NNNN."
 
 ## Feature-spec conventions
 
@@ -98,7 +115,8 @@ Tie layout to **this project's** architecture doc and concrete paths:
 - [ ] **structural:** layering rule X passes (project lint / convention)
 ```
 
-If layout is not decided yet, record an ADR first — do not invent framework defaults.
+If layout is not decided yet, **present options to the owner** and record an ADR
+after they confirm — do not decide alone or invent framework defaults.
 
 ### 3. Behavioral (manual — be concrete)
 
@@ -112,6 +130,18 @@ State the observable outcome and how to verify it (endpoint, test name, fixture)
 Avoid vague criteria ("works correctly", "handles errors well"). If it cannot be
 tested yet, say exactly what manual step proves it.
 
+### 4. Owner (ADR and binding decisions)
+
+Include when the session chooses among architectural alternatives or makes binding
+infra/schema/deps edits:
+
+```markdown
+- [ ] **owner:** Alternatives and recommendation presented; owner confirmed direction before ADR file created
+- [ ] **owner:** Binding edits (deps, infra, schema) only after owner participation in this session
+```
+
+Omit this section for purely mechanical feature work with no open decisions.
+
 ### Prefix legend
 
 | Prefix          | Verified by                                  |
@@ -119,6 +149,7 @@ tested yet, say exactly what manual step proves it.
 | **gate:**       | CI/local script (`pnpm …`)                   |
 | **structural:** | project architecture, path exists, lint rule |
 | **behavior:**   | test name, curl step, or fixture             |
+| **owner:**      | owner confirmed direction in chat before ADR / binding edits |
 
 Check items in the feature spec as you complete them (`- [x]`). All boxes must be
 ticked before opening the PR.
