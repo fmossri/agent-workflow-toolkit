@@ -16,10 +16,9 @@ logs. There is **no index and no keyword vocabulary** — prior context is found
 **search**.
 
 **Raise the bar:** lean does not mean empty. Every session with non-obvious work
-should leave **precious knowledge** a cold-start agent would otherwise grep or
-re-derive — alternatives weighed, gotchas, governance surprises, explicit do-NOTs.
-The HANDOFF is a brief for continuity; it is **not** a substitute for diary depth.
-The latest diary should be readable on its own, not only via HANDOFF.
+should leave **knowledge worth re-deriving**. The priority list below defines what
+that means. The HANDOFF is a brief for continuity; it is **not** a substitute for
+diary depth. The latest diary should be readable on its own, not only via HANDOFF.
 
 ## How to find prior context
 
@@ -92,17 +91,18 @@ what a session changed.
 - Prefer linking to ADRs/specs for the formal record; the diary explains the
   _why/how_ around them.
 
-### Precious knowledge checklist
+### What to prioritize
 
-For sessions with non-obvious work (ADR, infra, integration, debugging), a
-substantive entry should usually touch **at least two** of:
+For sessions with non-obvious work, prioritize in order:
 
-- **Alternatives** — options weighed and why one won (include rejected paths).
-- **Gotchas** — tooling, runtime, import paths, Docker, API quirks, etc.
-- **Governance / scope** — surprises about process, boundaries, or owner intent.
-- **Do-NOTs** — explicit constraints for the next session.
+1. **Knowledge worth re-deriving** — especially quirks, dead ends, and non-obvious
+   trade-offs
+2. **Gotchas** — tooling, runtime, import paths, Docker, API behavior, etc.
+3. **Do-NOTs** — explicit constraints for the next session
+4. **Governance / scope** — process surprises or owner-intent clarifications
+5. **Alternatives weighed** — useful when the session involved real option trade-offs
 
-Two short entries that each hit two checklist items beat one HANDOFF-sized stub.
+A substantive entry beats a HANDOFF-sized stub.
 
 ## Handoffs (read first, write last)
 

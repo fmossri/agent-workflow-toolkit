@@ -14,19 +14,9 @@ doc-linter's ADR-index sync check passes.
 ## Step 0 — Owner participation (required)
 
 Do **not** run `pnpm gen:create-adr` until the owner has confirmed the direction
-**in this session's conversation**, unless:
-
-- the owner's message explicitly states the chosen direction, or
-- a prior HANDOFF explicitly says **"direction approved:"** with the decision stated
-  (not merely "implement ADR-NNNN" or "pick among X/Y").
-
-Before Step 0:
-
-1. Present **context**, **alternatives**, pros/cons, and your **recommendation**.
-2. **Wait for owner participation** — confirm, adjust, or pick an option.
-
-Backlog notes, architecture "proposed" sections, and HANDOFF carry-forward text are
-**context**, not permission to decide alone.
+in this session (or a HANDOFF explicitly says **"direction approved:"** with the
+decision stated). If direction is not confirmed yet, present context, alternatives,
+pros/cons, and a recommendation, then wait. Full rule: `docs/adr/README.md`.
 
 ## Run the generator
 
@@ -56,5 +46,5 @@ Same-session **Proposed ADR + implementation** is fine after Step 0 passes.
 
 ## Rules
 
-- Never edit an `Accepted` ADR to reverse a decision — supersede it with a new ADR.
+- Do not edit an `Accepted` ADR to reverse a decision — recommend a new ADR to supersede it.
 - Process and participation gate: `docs/adr/README.md`.

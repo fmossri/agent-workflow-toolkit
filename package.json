@@ -1,6 +1,6 @@
 {
   "name": "agent-workflow",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Docs-first agent workflow toolkit — generators, doc-linter, templates. Consumers install as devDependencies; scaffolds copy into --target from package templates.",

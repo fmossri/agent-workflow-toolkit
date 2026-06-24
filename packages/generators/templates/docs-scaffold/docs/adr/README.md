@@ -56,8 +56,8 @@ Use the **`create-adr` skill** — it encodes the participation gate. Summary:
 3. Fill **Context**, **Decision**, **Alternatives considered**, and **Consequences**.
 4. Add nothing manually to the index — the generator inserts the row.
 5. Run `pnpm doc-lint`.
-6. Never edit the substance of an `Accepted` ADR to reverse it — supersede it with
-   a new ADR.
+6. Do not edit the substance of an `Accepted` ADR to reverse it — recommend a new
+   ADR to supersede it.
 
 Only the owner sets `Accepted`. Agents do not set `Accepted` unless the owner
 explicitly requests it in chat.
