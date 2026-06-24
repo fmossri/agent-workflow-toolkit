@@ -24,7 +24,8 @@ pnpm gen:create-feature-spec --slug user-auth --backlog-id PROJ-1 \
 ```
 
 - **`--slug`**: kebab-case identifier (filename under `docs/specs/features/`).
-- **`--backlog-id`**: backlog item this session implements (written to `backlog_ids`).
+- **`--backlog-id`**: backlog item this session implements (written to `backlog_ids`;
+  IDs like `M1-5.5` are allowed for inserted work).
 - **`--goal`**: one-line goal (defaults to `Implement <slug>`).
 
 ## After generation

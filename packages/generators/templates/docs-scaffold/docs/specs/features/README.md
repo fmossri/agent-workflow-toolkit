@@ -73,7 +73,7 @@ title: "Feature: <slug>"
 type: feature-spec
 status: Draft | Active | Completed | Superseded
 updated: YYYY-MM-DD
-backlog_ids: [PROJ-1] # one or more stable backlog IDs
+backlog_ids: [PROJ-1] # one or more stable backlog IDs; optional dotted insertion suffix allowed (e.g. M1-5.5)
 ---
 ```
 

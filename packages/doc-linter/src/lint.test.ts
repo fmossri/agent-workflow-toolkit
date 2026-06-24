@@ -141,6 +141,23 @@ backlog_ids: [M1-6]
     expect(run()).toEqual([]);
   });
 
+  it("allows an inserted backlog id with one dotted numeric suffix", () => {
+    write(
+      "docs/specs/features/error-handling-spec.md",
+      `---
+title: "Feature: error-handling-spec"
+type: feature-spec
+status: Draft
+updated: 2026-06-24
+backlog_ids: [M1-5.5]
+---
+
+# Feature: error-handling-spec
+`,
+    );
+    expect(run()).toEqual([]);
+  });
+
   it("flags a feature-spec missing backlog_ids", () => {
     write(
       "docs/specs/features/bill-listing.md",

@@ -1,6 +1,6 @@
 {
   "name": "@agent-workflow/doc-linter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "Validates doc front-matter against the JSON Schema; checks ADR index, incident/postmortem id sync, and relative links.",
